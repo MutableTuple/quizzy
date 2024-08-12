@@ -4,7 +4,7 @@ import { getAllUsers } from "../_lib/data-service";
 export default async function LeaderBoards() {
   const allUsers = await getAllUsers();
   if (!allUsers) return <p>loading</p>;
-
+  console.log("ALL USeRS", allUsers);
   return (
     <div className="w-full flex flex-col justify-center  items-center gap-4">
       {allUsers.map((user) => (

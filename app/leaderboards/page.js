@@ -1,6 +1,8 @@
 import Navbar from "../_components/Navbar";
 import LeaderBoards from "../_components/LeaderBoards";
 import { getAllUsers } from "../_lib/data-service";
+
+
 export default function page() {
   return (
     <div>

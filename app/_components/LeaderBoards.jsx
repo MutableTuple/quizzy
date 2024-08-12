@@ -1,6 +1,8 @@
 import React from "react";
 import { getAllUsers } from "../_lib/data-service";
 
+export const revalidate = 2;
+
 export default async function LeaderBoards() {
   const allUsers = await getAllUsers();
   if (!allUsers) return <p>loading</p>;

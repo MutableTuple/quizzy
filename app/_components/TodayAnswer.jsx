@@ -20,7 +20,7 @@ export default async function TodayAnswer() {
         <AnswerInput />
       ) : (
         <p className="text-green-700 py-2 px-3 bg-green-100 border border-2 border-green-500 rounded-lg text-sm font-semibold">
-          You've already solved today's question 🥳
+          You&apos;ve already solved today&apos;s question 🥳
         </p>
       )}
     </div>

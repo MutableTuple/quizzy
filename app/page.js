@@ -21,7 +21,7 @@ export default function Page() {
 
       <div className="w-full flex items-center justify-center flex-col mt-5 ">
         <div className="text-xs mb-4">
-          fastest person to solve today's question.
+          fastest person to solve today&apos;s question.
         </div>
         <FastestSolver />
       </div>

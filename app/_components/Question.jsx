@@ -14,7 +14,7 @@ export default async function Question({ children }) {
   return (
     <div className="w-full min-h-80 flex items-center justify-center flex flex-col px-4">
       <h1 className="uppercase text-xs text-stone-500 mt-4">
-        Today's question
+        Today&apos;s question
       </h1>
       <br />
       <div className="bg-stone-100  p-4 rounded-lg text-stone-700 w-full lg:w-2/4 md:w-3/4 tracking-wide ">

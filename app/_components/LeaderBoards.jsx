@@ -8,7 +8,10 @@ export default async function LeaderBoards() {
   return (
     <div className="w-full flex flex-col justify-center  items-center gap-4">
       {allUsers.map((user) => (
-        <div className="h-auto md:w-5/12 sm:w-8/12 w-11/12  py-2 px-3 rounded-full border border-2 text-stone-700 text-sm flex gap-2 justify-between hover:bg-purple-100 hover:scale-105 transition-all duration-300 hover:cursor-pointer">
+        <div
+          key={user.id}
+          className="h-auto md:w-5/12 sm:w-8/12 w-11/12  py-2 px-3 rounded-full border border-2 text-stone-700 text-sm flex gap-2 justify-between hover:bg-purple-100 hover:scale-105 transition-all duration-300 hover:cursor-pointer"
+        >
           <img src={user.picture} alt="" className="h-8 w-8 rounded-full" />
           <div className="flex w-full items-center justify-between ">
             <p className="uppercase font-semibold text-xs sm:text-sm text-stone-500">

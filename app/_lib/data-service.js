@@ -74,7 +74,7 @@ export async function getTodayQuestion(id) {
   const { data, error } = await supabase
     .from("Question")
     .select(
-      "todays_question, id , points, right, wrong, avg_time_to_solve, Answer(id, answer_text)"
+      "todays_question, id , points, right, wrong , question_image, avg_time_to_solve, Answer(id, answer_text)"
     )
     .eq("id", id);
 

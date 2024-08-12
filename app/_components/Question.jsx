@@ -4,7 +4,7 @@ import { IoTime } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { RxCrossCircled } from "react-icons/rx";
 import { getTodayQuestion, getTodayAnswer } from "../_lib/data-service";
-
+import Image from "next/image";
 export default async function Question({ children }) {
   const todayQuestion = await getTodayQuestion(
     "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee"
@@ -16,6 +16,14 @@ export default async function Question({ children }) {
       <h1 className="uppercase text-xs text-stone-500 mt-4">
         Today&apos;s question
       </h1>
+      <div className="relative h-48 w-48">
+        <Image
+          fill
+          src={todayQuestion[0].question_image}
+          alt=""
+          className=" absolute"
+        />
+      </div>
       <br />
       <div className="bg-stone-100  p-4 rounded-lg text-stone-700 w-full lg:w-2/4 md:w-3/4 tracking-wide ">
         <h1>{todayQuestion[0].todays_question}</h1>

@@ -9,9 +9,11 @@ import updateUserStats, {
   updateRightQuestions,
   updateWrongQuestions,
   wasTOdayAnswerRight,
+  getTodayQuestionId,
 } from "./data-service";
 
 import { redirect } from "next/navigation";
+
 export async function signInAction() {
   await signIn("google", { redirectTo: "/" });
 }
@@ -22,6 +24,8 @@ export async function signOutAction() {
 
 export async function checkAnwer(formData) {
   const session = await auth();
+  const todayQuestionId = await getTodayQuestionId();
+  console.log("TPDAY QUESTION ID", todayQuestionId);
   // user properties
   if (!session) {
     return redirect("/login");
@@ -30,31 +34,29 @@ export async function checkAnwer(formData) {
 
   const total_questions = logged_in_user.total_questions;
   const has_solved_question_today = logged_in_user.has_solved_question_today;
-  console.log("HAS SOLVED TODAY?", has_solved_question_today);
-  console.log("lofed in use", logged_in_user);
-  console.log(
-    "WAS TODAY ASNWER CORECT?",
-    logged_in_user.was_today_answer_right
+
+  const has_question_created_today = await getTodayQuestion(
+    todayQuestionId[0].id
   );
+
+  // const todays_question = has_question_created_today.map((ques) =>
+  //   ques.created_at.substring(0, 10) === todaysDate
+  //     ? console.log(ques.id)
+  //     : console.log(
+  //         "no question created today",
+  //         todaysDate.replace(/-/g, "").trim() * 1,
+  //         ques.created_at.substring(0, 10).replace(/-/g, "").trim() * 1
+  //       )
+  // );
+
+  // console.log("has_question_created_today", todays_question);
 
   const todayAnswerfunc = await getTodayAnswer(
     "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee"
   );
   const todayAnswer = todayAnswerfunc[0].answer_text;
-  const todayQuestion = await getTodayQuestion(
-    "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee"
-  );
 
-  console.log("RIGHT QUESTIONS", todayQuestion[0].right);
-
-  console.log("TODAY QUestion & answr", todayQuestion, todayAnswer);
-  console.log("TIME TAKEN TO SOLVE", formData.get("current_time"));
-  console.log(
-    "TOTOAL STATS",
-    logged_in_user.id,
-    logged_in_user.score,
-    todayQuestion[0].points
-  );
+  const todayQuestion = await getTodayQuestion(todayQuestionId[0].id);
   // submit logic
   const time_taken = formData.get("current_time");
   await getTimeTakenForSingleQuestion(
@@ -65,23 +67,15 @@ export async function checkAnwer(formData) {
 
   if (todayAnswer === formData.get("answer_text")) {
     console.log("correct");
-    await updateRightQuestions(
-      "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee",
-      todayQuestion[0].right
-    );
+    await updateRightQuestions(todayQuestionId[0].id, todayQuestion[0].right);
     await wasTOdayAnswerRight(logged_in_user.id, true);
-
     await updateUserStats(
       logged_in_user.id,
       logged_in_user.score * 1,
       todayQuestion[0].points * 1
     );
   } else {
-    console.log("WRONG");
-    await updateWrongQuestions(
-      "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee",
-      todayQuestion[0].wrong
-    );
+    await updateWrongQuestions(todayQuestionId[0].id, todayQuestion[0].wrong);
     await wasTOdayAnswerRight(logged_in_user.id, false);
   }
 }

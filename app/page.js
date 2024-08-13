@@ -7,6 +7,9 @@ import { signOutAction } from "./_lib/actions";
 import SignInButton from "./_components/SignInButton";
 import TodayAnswer from "./_components/TodayAnswer";
 import FastestSolver from "./_components/FastestSolver";
+
+export const revalidate = 20; //revalidate the cache! also this value cannot be computed this must be a value directly; value is in seconds
+
 export default function Page() {
   return (
     <div className="selection:bg-purple-400 selection:text-white">

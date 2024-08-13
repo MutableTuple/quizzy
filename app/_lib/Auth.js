@@ -30,6 +30,11 @@ const authConfig = {
       }
     },
   },
+  async session({ session, user }) {
+    const signedInUser = await getUser(session.user.email);
+    session.user.id = signedInUser.id;
+    return session;
+  },
   pages: {
     signIn: "/login",
   },

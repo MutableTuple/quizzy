@@ -3,12 +3,15 @@ import { MdSportsScore } from "react-icons/md";
 import { IoTime } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
 import { RxCrossCircled } from "react-icons/rx";
-import { getTodayQuestion, getTodayAnswer } from "../_lib/data-service";
+import {
+  getTodayQuestion,
+  getTodayAnswer,
+  getTodayQuestionId,
+} from "../_lib/data-service";
 import Image from "next/image";
 export default async function Question({ children }) {
-  const todayQuestion = await getTodayQuestion(
-    "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee"
-  );
+  const todayQuestionId = await getTodayQuestionId();
+  const todayQuestion = await getTodayQuestion(todayQuestionId[0].id);
   console.log("TODAY QUESIOTn", todayQuestion);
 
   return (
@@ -16,16 +19,11 @@ export default async function Question({ children }) {
       <h1 className="uppercase text-xs text-stone-500 mt-4">
         Today&apos;s question
       </h1>
-      <div className="relative h-48 w-48">
-        <Image
-          fill
-          src={todayQuestion[0].question_image}
-          alt=""
-          className=" absolute"
-        />
+      <div className="h-24 w-48 bg-red my-4">
+        <img src={todayQuestion[0].question_image} alt="" className=" " />
       </div>
       <br />
-      <div className="bg-stone-100  p-4 rounded-lg text-stone-700 w-full lg:w-2/4 md:w-3/4 tracking-wide ">
+      <div className="bg-stone-100  p-4 rounded-lg text-stone-700 w-full lg:max-w-2xl md:max-w-3/4 tracking-wide font-semibold  ">
         <h1>{todayQuestion[0].todays_question}</h1>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 my-6 sm:my-12  gap-4">

@@ -33,6 +33,7 @@ export async function getAllUsers() {
   // Assign ranks based on score
   let rank = 1;
   let previousScore = data[0]?.score;
+  let sameRankCount = 1;
   const updates = [];
 
   if (data.length > 0) {
@@ -41,7 +42,10 @@ export async function getAllUsers() {
 
     for (let i = 1; i < data.length; i++) {
       if (data[i].score !== previousScore) {
-        rank = i + 1;
+        rank += sameRankCount; // Increment rank by the number of people who had the same previous score
+        sameRankCount = 1;
+      } else {
+        sameRankCount++;
       }
       data[i].rank = rank;
       previousScore = data[i].score;
@@ -74,12 +78,36 @@ export async function getTodayQuestion(id) {
   const { data, error } = await supabase
     .from("Question")
     .select(
-      "todays_question, id , points, right, wrong , question_image, avg_time_to_solve, Answer(id, answer_text)"
+      "created_at, todays_question, id , points, right, wrong , question_image, avg_time_to_solve, Answer(id, answer_text)"
     )
     .eq("id", id);
 
   if (error) console.log(error.message);
 
+  return data;
+}
+
+export async function getTodayQuestionId() {
+  const now = new Date();
+  const todayStart = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  ).toISOString();
+  const tomorrowStart = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1
+  ).toISOString();
+
+  const { data, error } = await supabase
+    .from("Question")
+    .select("created_at, id")
+    .gte("created_at", todayStart)
+    .lt("created_at", tomorrowStart)
+    .order("created_at", { ascending: true });
+
+  if (error) console.log(error.message);
   return data;
 }
 

@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import { checkAnwer } from "../_lib/actions";
 import Timer from "./Timer";
+
 export default function AnswerInput() {
   return (
     <form
@@ -16,6 +19,7 @@ export default function AnswerInput() {
           className="border-2 border focus:outline-none w-52 sm:w-64  p-4 rounded-lg text-stone-500 focus:bg-stone-100 duration-200 transition-all"
           placeholder="your answer here"
           name="answer_text"
+          required
         />
         <button
           type="submit"

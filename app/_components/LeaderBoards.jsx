@@ -15,7 +15,7 @@ export default async function LeaderBoards() {
           <img src={user.picture} alt="" className="h-8 w-8 rounded-full" />
           <div className="flex w-full items-center justify-between ">
             <p className="uppercase font-semibold text-xs sm:text-sm text-stone-500">
-              {user.username.split(" ")[0]}
+              {user.username?.split(" ")[0]}
             </p>
             <div className="text-center">
               <p className="font-bold text-xs sm:text-sm   ">

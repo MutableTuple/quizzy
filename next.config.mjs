@@ -3,7 +3,10 @@ const nextConfig = {
   experimental: {
     serverActions: {
       // edit: updated to new key. Was previously `allowedForwardedHosts`
-      allowedOrigins: ["https://quizzy-yoz2.vercel.app/"],
+      allowedOrigins: [
+        "https://quizzy.webbstack.com/",
+        "https://quizzy-yoz2.vercel.app/",
+      ],
     },
   },
   images: {

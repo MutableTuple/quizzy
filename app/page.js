@@ -7,6 +7,7 @@ import { signOutAction } from "./_lib/actions";
 import SignInButton from "./_components/SignInButton";
 import TodayAnswer from "./_components/TodayAnswer";
 import FastestSolver from "./_components/FastestSolver";
+import LoggedAs from "./_components/LoggedAs";
 
 export const revalidate = 20; //revalidate the cache! also this value cannot be computed this must be a value directly; value is in seconds
 
@@ -21,6 +22,8 @@ export default function Page() {
       </Question> */}
 
       <TodayAnswer />
+
+      <LoggedAs />
 
       <div className="w-full flex items-center justify-center flex-col mt-5 ">
         <div className="text-xs mb-4">

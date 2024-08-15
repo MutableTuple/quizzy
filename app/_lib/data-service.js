@@ -74,6 +74,33 @@ export async function fastestSolver() {
   return data;
 }
 
+export async function getTodayQuestionIdStatus(user_id) {
+  const { data, error } = await supabase
+    .from("Users")
+    .select("today_question_id_and_status")
+    .eq("id", user_id);
+
+  return data;
+}
+/* 
+{
+  "question_id": "8e23381a-cb1c-4fd8-b3e7-24f276407fce",
+  "has_solved": false
+}
+*/
+export async function updateTodayQuestionIdStatus(user_id, todays_question_id) {
+  const { data, error } = await supabase
+    .from("Users")
+    .update({
+      today_question_id_and_status: {
+        question_id: todays_question_id,
+        has_solved: true,
+      },
+    })
+    .eq("id", user_id);
+  return data;
+}
+
 export async function getTodayQuestion(id) {
   const { data, error } = await supabase
     .from("Question")
@@ -119,19 +146,13 @@ export async function getTodayAnswer(id) {
   if (error) console.log(error.message);
   return data;
 }
-export async function getTimeTakenForSingleQuestion(
-  time,
-  id,
-  total_questions,
-  has_solved_question_today
-) {
+export async function getTimeTakenForSingleQuestion(time, id, total_questions) {
   try {
     const { data, error } = await supabase
       .from("Users")
       .update({
         single_time: time,
         total_questions: (total_questions += 1),
-        has_solved_question_today: true,
       })
       .eq("id", id);
 
@@ -146,6 +167,9 @@ export async function getTimeTakenForSingleQuestion(
     return null;
   }
 }
+
+// export async function hasTodaysQuestionSolved(id, user_id) {}
+
 export async function updateRightQuestions(id, right) {
   const { data, error } = await supabase
     .from("Question")

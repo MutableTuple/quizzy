@@ -19,9 +19,11 @@ export default async function Question({ children }) {
       <h1 className="uppercase text-xs text-stone-500 mt-4">
         Today&apos;s question
       </h1>
-      <div className="h-24 w-48 bg-red my-4">
-        <img src={todayQuestion[0].question_image} alt="" className=" " />
-      </div>
+      <img
+        src={todayQuestion[0].question_image}
+        alt=""
+        className="h-48 w-auto my-2"
+      />
       <br />
       <div className="bg-stone-100  p-4 rounded-lg text-stone-700 w-full lg:max-w-2xl md:max-w-3/4 tracking-wide font-semibold  ">
         <h1>{todayQuestion[0].todays_question}</h1>

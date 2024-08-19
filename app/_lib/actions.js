@@ -16,6 +16,12 @@ import updateUserStats, {
 
 import { redirect } from "next/navigation";
 
+// export async function check() {
+//   const todayQuestionId = await getTodayQuestionId();
+//   console.log("TODAT QWUSESIOTK NSDNS", );
+// }
+
+// check();
 export async function signInAction() {
   await signIn("google", { redirectTo: "/" });
 }
@@ -27,7 +33,6 @@ export async function signOutAction() {
 export async function checkAnwer(formData) {
   const session = await auth();
   const todayQuestionId = await getTodayQuestionId();
-  console.log("TPDAY QUESTION ID", todayQuestionId);
   // user properties
   if (!session) {
     return redirect("/login");
@@ -36,9 +41,7 @@ export async function checkAnwer(formData) {
 
   const total_questions = logged_in_user.total_questions;
 
-  const todayAnswerfunc = await getTodayAnswer(
-    "c3ac00a7-4bbe-4d04-9d03-0dccd84d8fee"
-  );
+  const todayAnswerfunc = await getTodayAnswer(todayQuestionId[0].id);
   const todayAnswer = todayAnswerfunc[0].answer_text;
 
   const todayQuestion = await getTodayQuestion(todayQuestionId[0].id);

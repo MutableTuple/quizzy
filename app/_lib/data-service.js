@@ -146,6 +146,7 @@ export async function getTodayAnswer(id) {
   if (error) console.log(error.message);
   return data;
 }
+
 export async function getTimeTakenForSingleQuestion(time, id, total_questions) {
   try {
     const { data, error } = await supabase

@@ -3,11 +3,11 @@
 import React from "react";
 import { checkAnwer } from "../_lib/actions";
 import Timer from "./Timer";
-import toast from "react-hot-toast";
-const notify = () =>
-  toast.success("your answer has been successfully submitted!");
+
+import SubmitBtn from "./SubmitBtn";
 
 export default function AnswerInput() {
+
   return (
     <form
       action={checkAnwer}
@@ -24,13 +24,7 @@ export default function AnswerInput() {
           name="answer_text"
           required
         />
-        <button
-          type="submit"
-          className="bg-purple-400 px-5 rounded-lg hover:bg-purple-500 duration-200 transition-all text-purple-100"
-          onClick={notify}
-        >
-          SUBMIT
-        </button>
+        <SubmitBtn />
       </div>
     </form>
   );

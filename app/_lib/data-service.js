@@ -30,26 +30,28 @@ export async function getAllUsers() {
     return null;
   }
 
-  // Assign ranks based on score
+  // Initialize variables for rank assignment
   let rank = 1;
-  let previousScore = data[0]?.score;
-  let sameRankCount = 1;
+  let previousScore = null;
   const updates = [];
 
   if (data.length > 0) {
-    data[0].rank = rank;
-    updates.push({ id: data[0].id, rank });
-
-    for (let i = 1; i < data.length; i++) {
-      if (data[i].score !== previousScore) {
-        rank += sameRankCount; // Increment rank by the number of people who had the same previous score
-        sameRankCount = 1;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].score > 0) {
+        if (data[i].score !== previousScore) {
+          // Assign rank and update previousScore
+          data[i].rank = rank;
+          previousScore = data[i].score;
+        } else {
+          // If the score is the same as the previous one, keep the same rank
+          data[i].rank = rank;
+        }
+        updates.push({ id: data[i].id, rank });
+        rank++; // Increment rank for the next user
       } else {
-        sameRankCount++;
+        data[i].rank = null; // No rank assigned for users with no score
+        updates.push({ id: data[i].id, rank: null });
       }
-      data[i].rank = rank;
-      previousScore = data[i].score;
-      updates.push({ id: data[i].id, rank });
     }
   }
 

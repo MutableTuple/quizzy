@@ -7,7 +7,7 @@ import {
 } from "../_lib/data-service";
 import AnswerInput from "./AnswerInput";
 import { auth } from "@/app/_lib/Auth";
-
+import { FaCheckCircle } from "react-icons/fa";
 export default async function TodayAnswer() {
   const session = await auth();
   const logged_in_user = await getUser(session?.user?.email);
@@ -44,7 +44,8 @@ export default async function TodayAnswer() {
       {todays_question_user_id !== today_question_id[0]?.id ? (
         <AnswerInput />
       ) : (
-        <p className="text-green-700 py-2 px-3 bg-green-100 border border-1 border-green-500 rounded-lg text-sm font-normal mx-2 ">
+        <p className="text-green-700 py-2 px-3 bg-green-200 border border-1 border-green-500 rounded-lg text-sm font-semibold mx-2 flex  items-center gap-2">
+          <FaCheckCircle size={24} />
           You&apos;ve already solved today&apos;s question,
           <br /> come back tommorow for another one! 🥳
         </p>

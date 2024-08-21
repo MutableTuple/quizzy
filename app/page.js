@@ -10,6 +10,7 @@ import LoggedAs from "./_components/LoggedAs";
 import SignInButton from "./_components/SignInButton";
 import SiginToSolve from "./_components/SiginToSolve";
 import PHLogo from "./_components/PHLogo";
+import { Toaster } from "react-hot-toast";
 
 export const revalidate = 20; //revalidate the cache! also this value cannot be computed this must be a value directly; value is in seconds
 
@@ -29,6 +30,7 @@ export default function Page() {
         <FastestSolver />
       </div>
       <Footer />
+      <Toaster />
     </div>
   );
 }

@@ -61,18 +61,17 @@ export async function checkAnwer(formData) {
 
   //
   if (todayAnswer === formData.get("answer_text")) {
-    console.log("correct");
     await updateRightQuestions(todayQuestionId[0].id, todayQuestion[0].right);
-
     await wasTOdayAnswerRight(logged_in_user.id, true);
-
     await updateUserStats(
       logged_in_user.id,
       logged_in_user.score * 1,
       todayQuestion[0].points * 1
     );
+    return redirect("/");
   } else {
     await updateWrongQuestions(todayQuestionId[0].id, todayQuestion[0].wrong);
     await wasTOdayAnswerRight(logged_in_user.id, false);
+    return redirect("/");
   }
 }

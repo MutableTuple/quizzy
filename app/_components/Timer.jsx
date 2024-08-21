@@ -6,18 +6,33 @@ const Timer = () => {
   const timeInputRef = useRef(null);
 
   useEffect(() => {
-    let seconds = 0;
+    // Get the saved seconds from localStorage, or start from 0 if none is found
+    let seconds = parseInt(localStorage.getItem("timerSeconds") || "0", 10);
+
     const updateTime = () => {
+      // Reset the timer every 2 hours (7200 seconds)
+      if (seconds >= 7200) {
+        seconds = 0;
+      }
+
       const minutes = Math.floor(seconds / 60);
       const remainingSeconds = seconds % 60;
       const formattedTime = `${String(minutes).padStart(2, "0")}:${String(
         remainingSeconds
       ).padStart(2, "0")}`;
+
       if (timeInputRef.current) {
         timeInputRef.current.value = formattedTime;
       }
+
+      // Save the current seconds count to localStorage
+      localStorage.setItem("timerSeconds", seconds.toString());
+
       seconds++;
     };
+
+    // Initial time update
+    updateTime();
 
     const intervalId = setInterval(updateTime, 1000);
 

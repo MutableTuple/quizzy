@@ -3,6 +3,7 @@ import SignInButton from "./SignInButton";
 import { signInAction } from "../_lib/actions";
 import { IoIosWarning } from "react-icons/io";
 import { auth } from "../_lib/Auth";
+
 export default async function SiginToSolve() {
   const session = await auth();
   return (

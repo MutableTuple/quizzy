@@ -6,11 +6,9 @@ const Timer = () => {
   const timeInputRef = useRef(null);
 
   useEffect(() => {
-    // Get the saved seconds from localStorage, or start from 0 if none is found
     let seconds = parseInt(localStorage.getItem("timerSeconds") || "0", 10);
 
     const updateTime = () => {
-      // Reset the timer every 2 hours (7200 seconds)
       if (seconds >= 7200) {
         seconds = 0;
       }
@@ -24,21 +22,14 @@ const Timer = () => {
       if (timeInputRef.current) {
         timeInputRef.current.value = formattedTime;
       }
-
-      // Save the current seconds count to localStorage
       localStorage.setItem("timerSeconds", seconds.toString());
-
       seconds++;
     };
 
-    // Initial time update
-    updateTime();
-
     const intervalId = setInterval(updateTime, 1000);
 
-    // Clean up interval on component unmount
     return () => clearInterval(intervalId);
-  }, []);
+  }); // `user` is here to trigger the useEffect if the user changes
 
   return (
     <input

@@ -2,19 +2,18 @@
 
 import React from "react";
 import { checkAnwer } from "../_lib/actions";
-import Timer from "./Timer";
-
+// import Timer from "./Timer";
+import CheckuserTimer from "./CheckUserTimer";
 import SubmitBtn from "./SubmitBtn";
 
 export default function AnswerInput() {
-
   return (
     <form
       action={checkAnwer}
       className="flex flex-col justify-center items-center"
     >
       <div className="flex items-center ">
-        <Timer />
+        <CheckuserTimer />
       </div>
       <div className="flex gap-4 ">
         <input

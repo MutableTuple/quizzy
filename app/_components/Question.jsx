@@ -8,11 +8,9 @@ import {
   getTodayAnswer,
   getTodayQuestionId,
 } from "../_lib/data-service";
-import Image from "next/image";
 export default async function Question({ children }) {
   const todayQuestionId = await getTodayQuestionId();
   const todayQuestion = await getTodayQuestion(todayQuestionId[0].id);
-  console.log("TODAY QUESIOTn", todayQuestion);
 
   return (
     <div className="w-full min-h-80 flex items-center justify-center flex flex-col px-4">

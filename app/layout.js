@@ -8,6 +8,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  manifest: "/manifest.json",
   title: "Quizzy | Sharpen your brain",
   description:
     "Quizzy is your go to solution for sharpening your brain in this digital era.",

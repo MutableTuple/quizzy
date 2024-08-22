@@ -116,6 +116,16 @@ export async function getTodayQuestion(id) {
   return data;
 }
 
+export async function changeTodayRightToFalse() {
+  const { data, error } = await supabase.from("Users").update({
+    was_today_answer_right: false,
+  });
+
+  if (error) console.log(error.message);
+
+  return data;
+}
+
 export async function getTodayQuestionId() {
   const now = new Date();
   const todayStart = new Date(
@@ -137,6 +147,7 @@ export async function getTodayQuestionId() {
     .order("created_at", { ascending: true });
 
   if (error) console.log(error.message);
+  changeTodayRightToFalse();
   return data;
 }
 
